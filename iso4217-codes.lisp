@@ -74,6 +74,7 @@
 (defun write-iso-file (filename)
   "write out a colon delimited file of iso4217 currency codes for use
 in one of the info plugins of the DeepSky irc bot."
-  (with-open-file (s filename :direction :output :if-exists :supersede :if-does-not-exist :create)
-    (loop for money in (gather-all-monies (get-currency-codes))
-          :do (format s "~A:~A~%" (string-downcase (iso-code money)) (description money)))))
+  (let ((monies (gather-all-monies (get-currency-codes))))
+    (with-open-file (s filename :direction :output :if-exists :supersede :if-does-not-exist :create)
+      (loop for money in monies
+            :do (format s "~&~A:~A" (string-downcase (iso-code money)) (description money))))))
