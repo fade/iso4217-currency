@@ -32,6 +32,9 @@
     (nreverse (strip-string-garbage inner-collector))))
 
 (defun get-currency-codes ()
+  "return a list of lists containing the iso codes, descriptions, and
+various metadata for every world currency with a listed active iso4217
+code listed on wikipedia."
   (let ((getsite *wiki-table-url*))
     ;; (format t "~&~A" getsite)
     (fetch getsite *browser*)
@@ -53,6 +56,7 @@
    (replaced-by :initarg :replaced-by :initform nil :accessor replaced-by)))
 
 (defun make-curr (vals)
+  "turn a list of strings describing an active iso4217 currency into an iso-currency-code object."
   (cond ((= (length vals) 5)
          (make-instance 'iso-currency-code
                         :iso-code (nth 0 vals)
@@ -64,6 +68,8 @@
                         :replaced-by (nth 4 vals)))))
 
 (defun gather-all-monies (lists)
+  "take a list of lists in the form expected by #'make-curr and return
+a list of iso-currency-code objects."
   (let ((kib lists))
     (loop for list in kib
           for a from 1
@@ -73,7 +79,8 @@
 
 (defun write-iso-file (filename)
   "write out a colon delimited file of iso4217 currency codes for use
-in one of the info plugins of the DeepSky irc bot."
+in one of the info plugins of the DeepSky irc bot, which was the point
+of this excercise. This should also offer a code use example."
   (let ((monies (gather-all-monies (get-currency-codes))))
     (with-open-file (s filename :direction :output :if-exists :supersede :if-does-not-exist :create)
       (loop for money in monies
