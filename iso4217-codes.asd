@@ -2,9 +2,9 @@
 
 (asdf:defsystem #:iso4217-codes
   :serial t
-  :description "Describe iso4217-codes here"
-  :author "Your Name <your.name@example.com>"
-  :license "Specify license here"
+  :description "a package to coalesce iso4217 currency codes from the internet."
+  :author "Brian O'Reilly <fade@deepsky.com>"
+  :license "MIT share alike."
   :depends-on (#:cl-mechanize
                #:cl-ppcre
                #:drakma)
