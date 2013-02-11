@@ -42,16 +42,17 @@ ISO4217-CODES> (write-iso-file #P "/tmp/currency-codes")
 NIL
 ISO4217-CODES> 
 </pre>
-and the contents of /tmp/currency-codes:
 
+and the contents of /tmp/currency-codes:
+<pre>
 zrz:Zaïrean zaïre
 zrn:Zaïrean new zaïre
 zmk:Zambian kwacha
 zal:South African financial rand (funds code) (discontinued)
 yum:Yugoslav dinar
 yug:Yugoslav dinar
-
-... 
+...
+</pre>
 
 etc.
 
