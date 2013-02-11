@@ -65,7 +65,7 @@ code listed on wikipedia."
          (make-instance 'iso-currency-code
                         :iso-code (nth 0 vals)
                         :description (nth 3 vals)
-                        :replaced-by (nth 4 vals)))))
+                        :replaced-by (nth 6 vals)))))
 
 (defun gather-all-monies (lists)
   "take a list of lists in the form expected by #'make-curr and return
