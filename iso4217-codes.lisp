@@ -6,7 +6,7 @@
 ;;; "iso4217-codes" goes here. Hacks and glory await!
 
 (defparameter *browser* (make-instance 'browser))
-(setf cl-mechanize:*user-agent* "Mozilla/5.0 (X11; Linux i686; rv:10.0.1) Gecko/20100101 Firefox/10.0.1")
+(setf cl-mechanize:*user-agent* "Mozilla/6.0 (Windows NT 6.2; WOW64; rv:16.0.1) Gecko/20121011 Firefox/16.0.1")
 (defparameter *wiki-table-url* "http://en.wikipedia.org/wiki/ISO_4217")
 
 (defun strip-char-from-string (str char)
@@ -41,12 +41,12 @@ code listed on wikipedia."
     (let* ((page (browser-page *browser*)) ;; mechanize returns an object containing an stp dom
            (result (page-dom page))
            (col nil))
-      ;; (format t "~A" page)
+      ;; (format t "~A" (describe page))
       (stp:do-recursively (a result)
-          ;; (format t "~&~A" (stp:string-value a))
-          (when (and (typep a 'stp:element)
-                     (equal (stp:local-name a) "tr"))
-            (push (get-table-fields-in-row a) col)))
+        (format t "~&~A" (stp:string-value a))
+        (when (and (typep a 'stp:element)
+                   (equal (stp:local-name a) "tr"))
+          (push (get-table-fields-in-row a) col)))
       col)))
 
 (defclass iso-currency-code ()

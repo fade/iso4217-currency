@@ -1,7 +1,7 @@
 This system gathers a list of iso4217 currency codes from the
 wikipedia website, and returns them as a list of currency objects
 which contain slots for the the iso currency code, the description, as
-well, as pointers to the iso codes of the currency that replaces the
+well as pointers to the iso codes of the currency that replaces the
 object in the event that it has been superseded. Forex, the irish punt
 is replaced by the euro.
 
