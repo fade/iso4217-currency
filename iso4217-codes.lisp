@@ -9,6 +9,9 @@
 (setf cl-mechanize:*user-agent* "Mozilla/6.0 (Windows NT 6.2; WOW64; rv:16.0.1) Gecko/20121011 Firefox/16.0.1")
 (defparameter *wiki-table-url* "http://en.wikipedia.org/wiki/ISO_4217")
 
+;; PURI will fail to parse uris to anchor links containing "illegal" characters. Turn down strictness.
+(setf puri:*strict-parse* nil)
+
 (defun strip-char-from-string (str char)
   "Return string with all instances of char removed."
   (concatenate 'string
