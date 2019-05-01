@@ -65,12 +65,13 @@ code listed on wikipedia."
    (used-by :initarg :used-by :initform nil :accessor used-by)
    (replaced-by :initarg :replaced-by :initform nil :accessor replaced-by)))
 
+
 (defun make-curr (vals)
   "turn a list of strings describing an iso4217 currency from the
 wikipedia table into an iso-currency-code object."
   (cond ((and ;; (every #'stringp vals)
-              (= (length vals) 5)
-              (<= (length (first vals)) 4))
+          (= (length vals) 5)
+          (<= (length (first vals)) 4))
          (format t "~&STANDARD! ~{\"~A\"~^ ~}" vals)
          (make-instance 'iso-currency-code
                         :iso-code (nth 0 vals)
