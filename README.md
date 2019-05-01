@@ -7,12 +7,14 @@ is replaced by the euro.
 
 ex: 
 
+<pre>
 ISO4217-CODES> (gather-all-monies (get-currency-codes))
 =>
-(#<ISO-CURRENCY-CODE #x302004409A7D> #<ISO-CURRENCY-CODE #x302004409A1D> #<ISO-CURRENCY-CODE #x3020044099BD> #<ISO-CURRENCY-CODE #x30200440995D> #<ISO-CURRENCY-CODE #x3020044098FD> #<ISO-CURRENCY-CODE #x30200440989D> #<ISO-CURRENCY-CODE #x30200440983D> #<ISO-CURRENCY-CODE #x3020044097DD> #<ISO-CURRENCY-CODE #x30200440977D> #<ISO-CURRENCY-CODE #x30200440971D> #<ISO-CURRENCY-CODE #x3020044096BD> #<ISO-CURRENCY-CODE #x30200440A14D> 
-...
-#<ISO-CURRENCY-CODE #x302004431DED> #<ISO-CURRENCY-CODE #x302004431D8D> #<ISO-CURRENCY-CODE #x302004431D2D> #<ISO-CURRENCY-CODE #x302004431CCD> #<ISO-CURRENCY-CODE #x302004431C6D> #<ISO-CURRENCY-CODE #x302004431C0D> #<ISO-CURRENCY-CODE #x302004431BAD> #<ISO-CURRENCY-CODE #x302004431B4D>)
-ISO4217-CODES>(describe (car 8))
+(list of currency objects in CL printable form that the github
+markdown dynamo refuses to display properly because the representation
+contains angle brackets)
+
+ISO4217-CODES>(describe (car *))
 =>
 #<ISO-CURRENCY-CODE #x302004A1375D>
 Class: #<STANDARD-CLASS ISO-CURRENCY-CODE>
@@ -22,6 +24,8 @@ ISO-CODE: "ZWR"
 DESCRIPTION: "Zimbabwean dollar A/09"
 USED-BY: NIL
 REPLACED-BY: "2008-08-01"
+</pre>
+<pre>
 ISO4217-CODES> (write-iso-file #P "/tmp/currency-codes")
 =>
 [#1][length: 7]  "ZWR"  "935"  "2"  "Zimbabwean dollar A/09"  "2008-08-01"  "2009-02-02"  "ZWL" 
@@ -38,17 +42,18 @@ ISO4217-CODES> (write-iso-file #P "/tmp/currency-codes")
 [#283][length: 5]  "AED"  "784"  "2"  "United Arab Emirates dirham"  "United Arab Emirates" 
 NIL
 ISO4217-CODES> 
+</pre>
 
 and the contents of /tmp/currency-codes:
-
+<pre>
 zrz:Zaïrean zaïre
 zrn:Zaïrean new zaïre
 zmk:Zambian kwacha
 zal:South African financial rand (funds code) (discontinued)
 yum:Yugoslav dinar
 yug:Yugoslav dinar
-
-... 
+...
+</pre>
 
 etc.
 
