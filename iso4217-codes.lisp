@@ -72,12 +72,12 @@ wikipedia table into an iso-currency-code object."
   (cond ((and ;; (every #'stringp vals)
           (= (length vals) 5)
           (<= (length (first vals)) 4))
-         (format t "~&STANDARD! ~{\"~A\"~^ ~}" vals)
+         (format t "~&STANDARD! ~{~S~^ ~}" vals)
          (make-instance 'iso-currency-code
                         :iso-code (nth 0 vals)
                         :description (nth 3 vals)))
         ((= (length vals) 7) ;; historical currency codes.
-         (format t "~&HISTORICAL! ~{\"~A\"~^ ~}" vals)
+         (format t "~&HISTORICAL! ~{~S~^ ~}" vals)
          (make-instance 'iso-currency-code
                         :iso-code (nth 0 vals)
                         :historic t
