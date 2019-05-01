@@ -7,7 +7,8 @@
   :license "MIT share alike."
   :depends-on (#:cl-mechanize
                #:cl-ppcre
-               #:drakma)
+               #:drakma
+               #:str)
   :components ((:file "package")
                (:file "iso4217-codes")))
 

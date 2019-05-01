@@ -2,7 +2,11 @@
 
 (in-package #:iso4217-codes)
 
-(declaim (optimize (debug 3) (safety 3) (speed 0)))
+#|
+
+|#                                        ;
+                                        ;
+(declaim (optimize (debug 3) (safety 3) (speed 0))) ;
 ;;; "iso4217-codes" goes here. Hacks and glory await!
 
 ;; PURI will fail to parse uris to anchor links containing "illegal" characters. Turn down strictness.
@@ -27,16 +31,17 @@
     (t (strip-no-break-space string))))
 
 (defun get-table-fields-in-row (tr)
+  "clean up input garbage here."
   (let (inner-collector)
     (stp:do-recursively (b tr)
       (when (and (typep b 'stp:element)
                  (equal (stp:local-name b) "td"))
-        (push (stp:string-value b) inner-collector)))
+        (push (str:trim (stp:string-value b)) inner-collector)))
     (nreverse (strip-string-garbage inner-collector))))
 
 (defun get-currency-codes ()
   "return a list of lists containing the iso codes, descriptions, and
-various metadata for every world currency with a listed active iso4217
+various metadata for every world currency with an active iso4217
 code listed on wikipedia."
   (let ((getsite *wiki-table-url*))
     ;; (format t "~&~A" getsite)
@@ -44,9 +49,8 @@ code listed on wikipedia."
     (let* ((page (browser-page *browser*)) ;; mechanize returns an object containing an stp dom
            (result (page-dom page))
            (col nil))
-      ;; (format t "~A" (describe page))
       (stp:do-recursively (a result)
-        (format t "~&~A" (stp:string-value a))
+        ;; (format t "~&~A" (stp:string-value a))
         (when (and (typep a 'stp:element)
                    (equal (stp:local-name a) "tr"))
           (push (get-table-fields-in-row a) col)))
@@ -54,21 +58,32 @@ code listed on wikipedia."
 
 (defclass iso-currency-code ()
   ((iso-code :initarg :iso-code :initform nil :accessor iso-code)
+   (historic :initarg :historic :initform nil :accessor historic)
    (description :initarg :description :initform nil :accessor description)
+   (from :initarg :from :initform nil :accessor from-date)
+   (until :initarg :until :initform nil :accessor until-date)
    (used-by :initarg :used-by :initform nil :accessor used-by)
    (replaced-by :initarg :replaced-by :initform nil :accessor replaced-by)))
 
 (defun make-curr (vals)
-  "turn a list of strings describing an active iso4217 currency into an iso-currency-code object."
-  (cond ((= (length vals) 5)
+  "turn a list of strings describing an iso4217 currency from the
+wikipedia table into an iso-currency-code object."
+  (cond ((and ;; (every #'stringp vals)
+              (= (length vals) 5)
+              (<= (length (first vals)) 4))
+         (format t "~&STANDARD! ~{\"~A\"~^ ~}" vals)
          (make-instance 'iso-currency-code
                         :iso-code (nth 0 vals)
                         :description (nth 3 vals)))
-        ((= (length vals) 7)
+        ((= (length vals) 7) ;; historical currency codes.
+         (format t "~&HISTORICAL! ~{\"~A\"~^ ~}" vals)
          (make-instance 'iso-currency-code
                         :iso-code (nth 0 vals)
+                        :historic t
                         :description (nth 3 vals)
-                        :replaced-by (nth 4 vals)))))
+                        :from (nth 4 vals)
+                        :until (nth 5 vals)
+                        :replaced-by (nth 6 vals)))))
 
 (defun gather-all-monies (lists)
   "take a list of lists in the form expected by #'make-curr and return
@@ -76,7 +91,7 @@ a list of iso-currency-code objects."
   (let ((kib lists))
     (loop for list in kib
           for a from 1
-          :do (format t "~&[#~D][length: ~d] ~{ ~S ~}" a (length list) list)
+          ;; :do (format t "~&[#~D][length: ~d] ~{ ~S ~}" a (length list) list)
           :when (make-curr list)
             :collecting it)))
 
