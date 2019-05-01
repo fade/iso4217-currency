@@ -16,7 +16,7 @@ contains angle brackets)
 
 ISO4217-CODES> (describe (first *)) 
 =>
-`#<ISO-CURRENCY-CODE {1005CA6563}>`
+```#<ISO-CURRENCY-CODE {1005CA6563}>```
   [standard-object]
 
 Slots with :INSTANCE allocation:
