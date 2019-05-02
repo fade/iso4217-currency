@@ -41,8 +41,9 @@
 
 (defun get-currency-codes ()
   "return a list of lists containing the iso codes, descriptions, and
-various metadata for every world currency with an active iso4217
-code listed on wikipedia."
+various metadata for every world currency with an active iso4217 code
+listed on wikipedia. If the underlying structure of the wikipedia page
+changes, this code will have to changed to match it."
   (let ((getsite *wiki-table-url*))
     ;; (format t "~&~A" getsite)
     (fetch getsite *browser*)
