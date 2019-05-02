@@ -29,7 +29,6 @@ ex:
       USED-BY                        = NIL
       REPLACED-BY                    = "USD/Zimbabwean bonds"
     ; No value
-    ISO4217-CODES> 
 
     ISO4217-CODES> (write-iso-file #P "/tmp/currency-codes")
     =>
