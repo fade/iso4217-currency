@@ -7,7 +7,8 @@ is replaced by the euro.
 
 ex: 
 
-<pre>
+```common-lisp
+
     ISO4217-CODES> (gather-all-monies (get-currency-codes))
     =>
     (list of currency objects in CL printable form that the github
@@ -50,7 +51,8 @@ ex:
     STANDARD! "AED" "784" "2" "United Arab Emirates dirham" "United Arab Emirates"
     NIL
     ISO4217-CODES> 
-</pre>
+
+```
 
 and the contents of /tmp/currency-codes:
 <pre>
