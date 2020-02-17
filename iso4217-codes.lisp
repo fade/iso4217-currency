@@ -2,10 +2,7 @@
 
 (in-package #:iso4217-codes)
 
-#|
 
-|#                                        ;
-                                        ;
 (declaim (optimize (debug 3) (safety 3) (speed 0))) ;
 ;;; "iso4217-codes" goes here. Hacks and glory await!
 
