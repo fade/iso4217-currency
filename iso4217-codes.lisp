@@ -103,7 +103,7 @@ of this excercise. This should also offer a code use example."
       (loop for money in monies
             :if (historic money)
               :do (format s "~&~A:~A" (string-downcase (iso-code money))
-                          (format nil "~A (HISTORIC)" (description money)))
+                          (format nil "~A (historic)" (description money)))
             :else
               :do (format s "~&~A:~A" (string-downcase (iso-code money))
                           (format nil "~A" (description money)))))))
