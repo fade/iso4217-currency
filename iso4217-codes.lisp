@@ -101,4 +101,9 @@ of this excercise. This should also offer a code use example."
   (let ((monies (gather-all-monies (get-currency-codes))))
     (with-open-file (s filename :direction :output :if-exists :supersede :if-does-not-exist :create)
       (loop for money in monies
-            :do (format s "~&~A:~A" (string-downcase (iso-code money)) (description money))))))
+            :if (historic money)
+              :do (format s "~&~A:~A" (string-downcase (iso-code money))
+                          (format nil "~A (HISTORIC)" (description money)))
+            :else
+              :do (format s "~&~A:~A" (string-downcase (iso-code money))
+                          (format nil "~A" (description money)))))))
